@@ -16,6 +16,11 @@
       gap: 20px;
     }
 
+    h2 {
+      color: white;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
     button {
       display: flex;
       justify-content: center;
@@ -61,16 +66,25 @@
     ">✌️</button>
 
     <button onclick="
-      score.wins, score.losses, score.ties = 0
-      alert('Score Reset!')
+      score.wins = score.losses = score.ties = 0;
+      localStorage.removeItem('score'); 
+      document.querySelector('h2').innerHTML = `Wins: ${score.wins} | Losses: ${score.losses} | Ties: ${score.ties}`
+      alert('Score Reset!');
     ">🔄</button>
   </div>
 
+  <div class="score_container">
+    <h2>Hello</h2>
+  </div>
+
   <script>
-    const score = {
+    
+
+    const score = JSON.parse(localStorage.getItem('score')) ||
+    {
       wins: 0,
-      ties: 0,
       losses: 0,
+      ties: 0
     };
 
     function playGame(playerMove) {
@@ -99,7 +113,7 @@
             result = 'Winner: Bot!\nBummer! 👏🏻';
             winner = 'bot'
           }
-      } else if (playerMove === 'Scissors') {
+      } else {
           if (computerMove === 'Rock') {
             result = 'Result: Tie!\nWin shared!';
             winner = 'tie'
@@ -114,14 +128,21 @@
 
       if (winner === 'player') {
         score.wins += 1
+        document.querySelector('h2').innerHTML = `Wins: ${score.wins} | Losses: ${score.losses} | Ties: ${score.ties}`
       } else if (winner === 'bot') {
         score.losses += 1 
+        document.querySelector('h2').innerHTML = `Wins: ${score.wins} | Losses: ${score.losses} | Ties: ${score.ties}`
       } else if (winner === 'tie') {
         score.ties += 1
+        document.querySelector('h2').innerHTML = `Wins: ${score.wins} | Losses: ${score.losses} | Ties: ${score.ties}`
       };
 
-      alert(`You: ${playerMove}\nBot: ${computerMove}\n${result}\nWins: ${score.wins} | Losses: ${score.losses} | Ties: ${score.ties}`);
+      localStorage.setItem('score', JSON.stringify(score));
+
+      alert(`You: ${playerMove}\nBot: ${computerMove}\n${result}`);
     }
+
+    document.querySelector('h2').innerHTML = `Wins: ${score.wins} | Losses: ${score.losses} | Ties: ${score.ties}`
 
     function pickComputerMove() {
       const randomNum = Math.random();
