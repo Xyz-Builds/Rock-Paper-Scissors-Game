@@ -17,7 +17,9 @@
     }
 
     h2 {
-      color: white;
+      color: black;
+      font-weight: bold;
+      font-size: 25px;
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
@@ -47,6 +49,20 @@
     .header1 {
       font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
       color: white;
+    }
+
+    .score_container {
+      display: flex;
+      margin-top: 25px;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 20px;
+      padding-right: 25px;
+      background-color: rgb(224, 224, 224);
+      width: 350px;
+      height: 50px;
+      border-radius: 30px;
+      border: 5px darkblue solid;
     }
   </style>
 </head>
@@ -78,8 +94,6 @@
   </div>
 
   <script>
-    
-
     const score = JSON.parse(localStorage.getItem('score')) ||
     {
       wins: 0,
