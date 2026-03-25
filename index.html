@@ -69,7 +69,7 @@
     .resetScore_button {
       display: flex;
       position: absolute;
-      top: 350px;
+      top: 400px;
       padding-top: 5px;
       color: white;
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -88,6 +88,14 @@
       color: black;
       font-weight: bold;
       font-size: 25px;
+      margin-bottom: 0;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    .score_h1_winner {
+      color: black;
+      font-weight: bold;
+      font-size: 26px;
       margin-bottom: 0;
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
@@ -110,6 +118,7 @@
   </div>
 
   <div class="score_container">
+    <h1 class="score_h1_winner">Choose a move to play!</h1>
     <h1 class="score_h1">Play to get started!</h1>
     <h2>Hello</h2>
   </div>
@@ -171,12 +180,15 @@
       if (winner === 'player') {
         score.wins += 1
         document.querySelector('h2').innerHTML = `Wins: ${score.wins} | Losses: ${score.losses} | Ties: ${score.ties}`
+        document.querySelector('.score_h1_winner').innerHTML = "You win,"
       } else if (winner === 'bot') {
         score.losses += 1 
         document.querySelector('h2').innerHTML = `Wins: ${score.wins} | Losses: ${score.losses} | Ties: ${score.ties}`
+        document.querySelector('.score_h1_winner').innerHTML = "You lose,"
       } else if (winner === 'tie') {
         score.ties += 1
         document.querySelector('h2').innerHTML = `Wins: ${score.wins} | Losses: ${score.losses} | Ties: ${score.ties}`
+        document.querySelector('.score_h1_winner').innerHTML = "You tied,"
       };
 
       localStorage.setItem('score', JSON.stringify(score));
